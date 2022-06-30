@@ -8,13 +8,37 @@ import UserContext from "../contexts/UserContext";
 export default function MinhaCarteira() {
   const { usuario } = useContext(UserContext);
   console.log(usuario);
+  const navigate = useNavigate();
+  function voltar() {
+    navigate("/");
+  }
   return (
     <Container>
       <Topo>
         <h1>Olá, {usuario.name}</h1>
-        <ion-icon name="exit-outline"></ion-icon>
+        <BotaoSair onClick={voltar}>
+          <ion-icon name="exit-outline"></ion-icon>
+        </BotaoSair>
       </Topo>
-      <CaixaVazia></CaixaVazia>
+      <CaixaVazia>
+        <div>
+          <span>Não há registros de</span>
+          <br />
+          <span>entrada ou saida</span>
+        </div>
+      </CaixaVazia>
+      <AreaBotoes>
+        <BotaoAdicionar>
+          <ion-icon name="add-circle-outline"></ion-icon>
+          <h2>Nova</h2>
+          <h2>entrada</h2>
+        </BotaoAdicionar>
+        <BotaoRemover>
+          <ion-icon name="remove-circle-outline"></ion-icon>
+          <h2>Nova</h2>
+          <h2>saída</h2>
+        </BotaoRemover>
+      </AreaBotoes>
     </Container>
   );
 }
@@ -43,11 +67,83 @@ const Topo = styled.div`
 `;
 
 const CaixaVazia = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 326px;
-  height: 580px;
+  height: 60%;
   border-radius: 5px;
   border: 0;
   background-color: #ffffff;
   margin-left: auto;
   margin-right: auto;
+  div {
+    width: 200px;
+    margin-left: 10px;
+  }
+  span {
+    font-family: "Raleway";
+    font-weight: 400;
+    font-size: 20px;
+    color: #868686;
+    :last-child {
+      margin-left: 12px;
+    }
+  }
+`;
+
+const BotaoSair = styled.div`
+  cursor: pointer;
+`;
+
+const AreaBotoes = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+`;
+
+const BotaoAdicionar = styled.div`
+  width: 155px;
+  height: 114px;
+  background-color: #a328d6;
+  border-radius: 5px;
+  border: 0;
+  margin-left: 10px;
+  ion-icon {
+    color: #ffffff;
+    font-size: 30px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 26px;
+  }
+  h2 {
+    font-family: "Raleway";
+    font-weight: 700;
+    font-size: 17px;
+    color: #ffffff;
+    margin-left: 10px;
+  }
+`;
+
+const BotaoRemover = styled.div`
+  width: 155px;
+  height: 114px;
+  background-color: #a328d6;
+  border-radius: 5px;
+  border: 0;
+  margin-right: 10px;
+  ion-icon {
+    color: #ffffff;
+    font-size: 30px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 26px;
+  }
+  h2 {
+    font-family: "Raleway";
+    font-weight: 700;
+    font-size: 17px;
+    color: #ffffff;
+    margin-left: 10px;
+  }
 `;
