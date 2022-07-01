@@ -12,6 +12,12 @@ export default function MinhaCarteira() {
   function voltar() {
     navigate("/");
   }
+  function paginaAdicionar() {
+    navigate("/somarDinheiro");
+  }
+  function paginaRemover() {
+    navigate("/subtrairDinheiro");
+  }
   return (
     <Container>
       <Topo>
@@ -28,16 +34,16 @@ export default function MinhaCarteira() {
         </div>
       </CaixaVazia>
       <AreaBotoes>
-        <BotaoAdicionar>
+        <BotaoDinheiro onClick={paginaAdicionar}>
           <ion-icon name="add-circle-outline"></ion-icon>
           <h2>Nova</h2>
           <h2>entrada</h2>
-        </BotaoAdicionar>
-        <BotaoRemover>
+        </BotaoDinheiro>
+        <BotaoDinheiro onClick={paginaRemover}>
           <ion-icon name="remove-circle-outline"></ion-icon>
           <h2>Nova</h2>
           <h2>saída</h2>
-        </BotaoRemover>
+        </BotaoDinheiro>
       </AreaBotoes>
     </Container>
   );
@@ -102,7 +108,7 @@ const AreaBotoes = styled.div`
   margin-top: 20px;
 `;
 
-const BotaoAdicionar = styled.div`
+const BotaoDinheiro = styled.div`
   width: 155px;
   height: 114px;
   background-color: #a328d6;
@@ -125,7 +131,7 @@ const BotaoAdicionar = styled.div`
   }
 `;
 
-const BotaoRemover = styled.div`
+const Botao = styled.div`
   width: 155px;
   height: 114px;
   background-color: #a328d6;

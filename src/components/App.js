@@ -5,6 +5,8 @@ import UserContext from "../contexts/UserContext";
 import Home from "./Home";
 import Cadastro from "./Cadastro";
 import MinhaCarteira from "./MinhaCarteira";
+import SomarDinheiro from "./SomarDinheiro";
+import SubtrairDinheiro from "./SubtrairDinheiro";
 
 export default function App() {
   const [usuario, setUsuario] = useState({});
@@ -17,6 +19,8 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/minhaCarteira" element={<MinhaCarteira />} />
+          <Route path="/somarDinheiro" element={<SomarDinheiro />} />
+          <Route path="/subtrairDinheiro" element={<SubtrairDinheiro />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
