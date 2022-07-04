@@ -16,7 +16,7 @@ export default function Home() {
   function fazerLogin(event) {
     event.preventDefault();
 
-    const promise = axios.post("http://localhost:5000/login", {
+    const promise = axios.post("https://my-wallet-amorim.herokuapp.com/login", {
       email: email,
       password: senha,
     });

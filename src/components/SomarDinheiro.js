@@ -25,7 +25,7 @@ export default function SomarDinheiro() {
         descricao: descricao,
       };
       const promise = axios.post(
-        "http://localhost:5000/walletAdd",
+        "https://my-wallet-amorim.herokuapp.com/walletAdd",
         data,
         config
       );

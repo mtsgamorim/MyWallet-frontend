@@ -46,7 +46,10 @@ export default function MinhaCarteira() {
     const config = {
       headers: { Authorization: `Bearer ${usuario.token}` },
     };
-    const promise = axios.get("http://localhost:5000/wallet", config);
+    const promise = axios.get(
+      "https://my-wallet-amorim.herokuapp.com/wallet",
+      config
+    );
     promise.then((res) => {
       setWallet([...res.data]);
     });

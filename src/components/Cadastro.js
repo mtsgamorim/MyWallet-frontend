@@ -15,11 +15,14 @@ export default function Home() {
   function fazerCadastro(event) {
     event.preventDefault();
     if (senha === confirmaSenha) {
-      const promise = axios.post("http://localhost:5000/cadastro", {
-        name: nome,
-        email: email,
-        password: senha,
-      });
+      const promise = axios.post(
+        "https://my-wallet-amorim.herokuapp.com/cadastro",
+        {
+          name: nome,
+          email: email,
+          password: senha,
+        }
+      );
       promise.then((res) => {
         navigate("/");
       });
