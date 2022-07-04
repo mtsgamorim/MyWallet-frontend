@@ -219,7 +219,7 @@ const Caixa = styled.div`
 `;
 
 const ConteudoCaixa = styled.div`
-  height: 470px;
+  height: 80%;
   overflow: auto;
 `;
 
