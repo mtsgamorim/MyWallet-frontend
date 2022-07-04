@@ -32,6 +32,9 @@ export default function SomarDinheiro() {
       promise.then((res) => {
         navigate("/minhaCarteira");
       });
+      promise.catch((err) => {
+        alert("preencha os dados corretamente");
+      });
     }
   }
   function voltar() {
