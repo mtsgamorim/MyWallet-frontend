@@ -31,6 +31,10 @@ export default function MinhaCarteira() {
       somaTotal -= aux;
     }
   }
+  console.log(somaTotal);
+  let somaTotalFormatado = somaTotal.toString();
+  console.log(somaTotalFormatado);
+  somaTotalFormatado = somaTotalFormatado?.replace(".", ",");
   function valorTotalPositivo() {
     if (somaTotal > 0) {
       return true;
@@ -85,7 +89,11 @@ export default function MinhaCarteira() {
         </ConteudoCaixa>
         <Footer>
           <h3>SALDO</h3>
-          {boolPositivo ? <h4>{somaTotal}</h4> : <h5>{somaTotal}</h5>}
+          {boolPositivo ? (
+            <h4>{somaTotalFormatado}</h4>
+          ) : (
+            <h5>{somaTotalFormatado}</h5>
+          )}
         </Footer>
       </Caixa>
     );
