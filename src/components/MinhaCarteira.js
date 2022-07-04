@@ -32,7 +32,7 @@ export default function MinhaCarteira() {
     }
   }
   console.log(somaTotal);
-  let somaTotalFormatado = somaTotal.toString();
+  let somaTotalFormatado = somaTotal.toFixed(2);
   console.log(somaTotalFormatado);
   somaTotalFormatado = somaTotalFormatado?.replace(".", ",");
   function valorTotalPositivo() {

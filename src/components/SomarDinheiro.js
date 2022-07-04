@@ -19,6 +19,8 @@ export default function SomarDinheiro() {
     let valorNumConvertido = parseFloat(valorNum).toFixed(2);
     if (valorNumConvertido < 0) {
       alert("Apenas números positivos");
+    } else if (descricao.length >= 24) {
+      alert("descricao muito grande, maximo 23 caracteres");
     } else {
       const data = {
         valor: valorNumConvertido,
