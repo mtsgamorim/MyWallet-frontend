@@ -1,13 +1,24 @@
 import axios from "axios";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
 
 export default function MinhaCarteira() {
   const { usuario } = useContext(UserContext);
+  const [wallet, setWallet] = useState([]);
+  console.log(wallet);
+  const config = {
+    headers: { Authorization: `Bearer ${usuario.token}` },
+  };
   console.log(usuario);
+  useEffect(() => {
+    const promise = axios.get("http://localhost:5000/wallet", config);
+    promise.then((res) => {
+      setWallet([res.data]);
+    });
+  }, []);
   const navigate = useNavigate();
   function voltar() {
     navigate("/");
@@ -18,6 +29,29 @@ export default function MinhaCarteira() {
   function paginaRemover() {
     navigate("/subtrairDinheiro");
   }
+  function Vazio() {
+    return (
+      <CaixaVazia>
+        <div>
+          <span>Não há registros de</span>
+          <br />
+          <span>entrada ou saida</span>
+        </div>
+      </CaixaVazia>
+    );
+  }
+
+  function NaoVazio() {
+    return (
+      <Caixa>
+        <ConteudoCaixa></ConteudoCaixa>
+        <Footer>
+          <h3>SALDO</h3>
+          <h4>20</h4>
+        </Footer>
+      </Caixa>
+    );
+  }
   return (
     <Container>
       <Topo>
@@ -26,13 +60,7 @@ export default function MinhaCarteira() {
           <ion-icon name="exit-outline"></ion-icon>
         </BotaoSair>
       </Topo>
-      <CaixaVazia>
-        <div>
-          <span>Não há registros de</span>
-          <br />
-          <span>entrada ou saida</span>
-        </div>
-      </CaixaVazia>
+      {wallet.length > 0 ? <NaoVazio /> : <Vazio />}
       <AreaBotoes>
         <BotaoDinheiro onClick={paginaAdicionar}>
           <ion-icon name="add-circle-outline"></ion-icon>
@@ -151,5 +179,37 @@ const Botao = styled.div`
     font-size: 17px;
     color: #ffffff;
     margin-left: 10px;
+  }
+`;
+
+const Caixa = styled.div`
+  width: 326px;
+  height: 60%;
+  border-radius: 5px;
+  border: 0;
+  background-color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const ConteudoCaixa = styled.div`
+  height: 470px;
+`;
+
+const Footer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  h3 {
+    font-family: "Raleway";
+    font-weight: 700;
+    font-size: 17px;
+    margin-left: 10px;
+  }
+  h4 {
+    font-family: "Raleway";
+    font-weight: 400;
+    font-size: 17px;
+    color: #03ac00;
+    margin-right: 10px;
   }
 `;

@@ -6,13 +6,26 @@ import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
 
 export default function SomarDinheiro() {
+  const { usuario } = useContext(UserContext);
   const [valor, setValor] = useState("");
   const [descricao, setDescricao] = useState("");
+  const config = {
+    headers: { Authorization: `Bearer ${usuario.token}` },
+  };
   const navigate = useNavigate();
   function somarValor(event) {
     event.preventDefault();
+    const valorNum = valor?.replace(",", ".");
+    let valorNumConvertido = parseFloat(valorNum).toFixed(2);
+    const data = {
+      valor: valorNumConvertido,
+      descricao: descricao,
+    };
     // COLOCAR LOGICA DO AXIOS AQUI
-    navigate("/minhaCarteira");
+    const promise = axios.post("http://localhost:5000/walletAdd", data, config);
+    promise.then((res) => {
+      navigate("/minhaCarteira");
+    });
   }
   function voltar() {
     navigate("/minhaCarteira");
