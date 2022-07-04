@@ -6,17 +6,30 @@ import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
 
 export default function MinhaCarteira() {
-  const { usuario } = useContext(UserContext);
+  function Transacao({ day, soma, valor, descricao }) {
+    const novoValor = valor?.replace(".", ",");
+    return (
+      <Lista>
+        <span>{day}</span>
+        <div>
+          <h4>{descricao}</h4>
+        </div>
+        <h5>{novoValor}</h5>
+      </Lista>
+    );
+  }
+
   const [wallet, setWallet] = useState([]);
+  const { usuario } = useContext(UserContext);
   console.log(wallet);
-  const config = {
-    headers: { Authorization: `Bearer ${usuario.token}` },
-  };
   console.log(usuario);
   useEffect(() => {
+    const config = {
+      headers: { Authorization: `Bearer ${usuario.token}` },
+    };
     const promise = axios.get("http://localhost:5000/wallet", config);
     promise.then((res) => {
-      setWallet([res.data]);
+      setWallet([...res.data]);
     });
   }, []);
   const navigate = useNavigate();
@@ -44,7 +57,16 @@ export default function MinhaCarteira() {
   function NaoVazio() {
     return (
       <Caixa>
-        <ConteudoCaixa></ConteudoCaixa>
+        <ConteudoCaixa>
+          {wallet.map((item) => (
+            <Transacao
+              day={item.day}
+              soma={item.soma}
+              valor={item.valor}
+              descricao={item.descricao}
+            />
+          ))}
+        </ConteudoCaixa>
         <Footer>
           <h3>SALDO</h3>
           <h4>20</h4>
@@ -159,29 +181,6 @@ const BotaoDinheiro = styled.div`
   }
 `;
 
-const Botao = styled.div`
-  width: 155px;
-  height: 114px;
-  background-color: #a328d6;
-  border-radius: 5px;
-  border: 0;
-  margin-right: 10px;
-  ion-icon {
-    color: #ffffff;
-    font-size: 30px;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 26px;
-  }
-  h2 {
-    font-family: "Raleway";
-    font-weight: 700;
-    font-size: 17px;
-    color: #ffffff;
-    margin-left: 10px;
-  }
-`;
-
 const Caixa = styled.div`
   width: 326px;
   height: 60%;
@@ -211,5 +210,30 @@ const Footer = styled.div`
     font-size: 17px;
     color: #03ac00;
     margin-right: 10px;
+  }
+`;
+
+const Lista = styled.div`
+  display: flex;
+  margin-top: 10px;
+  div {
+    width: 220px;
+  }
+  span {
+    color: #c6c6c6;
+    font-family: "Raleway";
+    font-weight: 400;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  h4 {
+    font-family: "Raleway";
+    font-weight: 400;
+    font-size: 16px;
+  }
+  h5 {
+    font-family: "Raleway";
+    font-weight: 400;
+    font-size: 16px;
   }
 `;

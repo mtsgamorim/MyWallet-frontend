@@ -17,19 +17,22 @@ export default function SubtrairDinheiro() {
     event.preventDefault();
     let valorNum = valor?.replace(",", ".");
     let valorNumConvertido = parseFloat(valorNum).toFixed(2);
-    const data = {
-      valor: valorNumConvertido,
-      descricao: descricao,
-    };
-    // COLOCAR LOGICA DO AXIOS AQUI
-    const promise = axios.post(
-      "http://localhost:5000/walletDelete",
-      data,
-      config
-    );
-    promise.then((res) => {
-      navigate("/minhaCarteira");
-    });
+    if (valorNumConvertido < 0) {
+      alert("Apenas números positivos");
+    } else {
+      const data = {
+        valor: valorNumConvertido,
+        descricao: descricao,
+      };
+      const promise = axios.post(
+        "http://localhost:5000/walletAdd",
+        data,
+        config
+      );
+      promise.then((res) => {
+        navigate("/minhaCarteira");
+      });
+    }
   }
   function voltar() {
     navigate("/minhaCarteira");
