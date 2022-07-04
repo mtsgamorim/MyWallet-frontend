@@ -31,9 +31,7 @@ export default function MinhaCarteira() {
       somaTotal -= aux;
     }
   }
-  console.log(somaTotal);
   let somaTotalFormatado = somaTotal.toFixed(2);
-  console.log(somaTotalFormatado);
   somaTotalFormatado = somaTotalFormatado?.replace(".", ",");
   function valorTotalPositivo() {
     if (somaTotal > 0) {
