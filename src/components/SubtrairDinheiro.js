@@ -25,7 +25,7 @@ export default function SubtrairDinheiro() {
         descricao: descricao,
       };
       const promise = axios.post(
-        "http://localhost:5000/walletAdd",
+        "http://localhost:5000/walletDelete",
         data,
         config
       );

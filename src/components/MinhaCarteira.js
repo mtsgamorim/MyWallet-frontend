@@ -9,7 +9,7 @@ export default function MinhaCarteira() {
   function Transacao({ day, soma, valor, descricao }) {
     const novoValor = valor?.replace(".", ",");
     return (
-      <Lista>
+      <Lista soma={soma}>
         <span>{day}</span>
         <div>
           <h4>{descricao}</h4>
@@ -58,8 +58,9 @@ export default function MinhaCarteira() {
     return (
       <Caixa>
         <ConteudoCaixa>
-          {wallet.map((item) => (
+          {wallet.map((item, index) => (
             <Transacao
+              key={index}
               day={item.day}
               soma={item.soma}
               valor={item.valor}
@@ -235,5 +236,6 @@ const Lista = styled.div`
     font-family: "Raleway";
     font-weight: 400;
     font-size: 16px;
+    color: ${(props) => (props.soma ? "#03AC00" : "#C70000")};
   }
 `;
