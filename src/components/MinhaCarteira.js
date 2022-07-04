@@ -21,8 +21,23 @@ export default function MinhaCarteira() {
 
   const [wallet, setWallet] = useState([]);
   const { usuario } = useContext(UserContext);
-  console.log(wallet);
-  console.log(usuario);
+  let somaTotal = 0;
+  for (let i = 0; i < wallet.length; i++) {
+    let aux = parseFloat(wallet[i].valor);
+    if (wallet[i].soma) {
+      let aux = parseFloat(wallet[i].valor);
+      somaTotal += aux;
+    } else {
+      somaTotal -= aux;
+    }
+  }
+  function valorTotalPositivo() {
+    if (somaTotal > 0) {
+      return true;
+    }
+    return false;
+  }
+  let boolPositivo = valorTotalPositivo();
   useEffect(() => {
     const config = {
       headers: { Authorization: `Bearer ${usuario.token}` },
@@ -70,7 +85,7 @@ export default function MinhaCarteira() {
         </ConteudoCaixa>
         <Footer>
           <h3>SALDO</h3>
-          <h4>20</h4>
+          {boolPositivo ? <h4>{somaTotal}</h4> : <h5>{somaTotal}</h5>}
         </Footer>
       </Caixa>
     );
@@ -194,11 +209,14 @@ const Caixa = styled.div`
 
 const ConteudoCaixa = styled.div`
   height: 470px;
+  overflow: auto;
 `;
 
 const Footer = styled.div`
   display: flex;
+  height: 28px;
   justify-content: space-between;
+  align-items: center;
   h3 {
     font-family: "Raleway";
     font-weight: 700;
@@ -210,6 +228,13 @@ const Footer = styled.div`
     font-weight: 400;
     font-size: 17px;
     color: #03ac00;
+    margin-right: 10px;
+  }
+  h5 {
+    font-family: "Raleway";
+    font-weight: 400;
+    font-size: 17px;
+    color: #c70000;
     margin-right: 10px;
   }
 `;
