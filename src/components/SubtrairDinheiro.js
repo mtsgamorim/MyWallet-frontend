@@ -27,7 +27,7 @@ export default function SubtrairDinheiro() {
         descricao: descricao,
       };
       const promise = axios.post(
-        "https://my-wallet-amorim.herokuapp.com/walletDelete",
+        "https://mywallet-back-807c.onrender.com/walletDelete",
         data,
         config
       );

@@ -45,7 +45,7 @@ export default function MinhaCarteira() {
       headers: { Authorization: `Bearer ${usuario.token}` },
     };
     const promise = axios.get(
-      "https://my-wallet-amorim.herokuapp.com/wallet",
+      "https://mywallet-back-807c.onrender.com/wallet",
       config
     );
     promise.then((res) => {

@@ -16,7 +16,7 @@ export default function Home() {
     event.preventDefault();
     if (senha === confirmaSenha) {
       const promise = axios.post(
-        "https://my-wallet-amorim.herokuapp.com/cadastro",
+        "https://mywallet-back-807c.onrender.com/cadastro",
         {
           name: nome,
           email: email,

@@ -16,10 +16,13 @@ export default function Home() {
   function fazerLogin(event) {
     event.preventDefault();
 
-    const promise = axios.post("https://my-wallet-amorim.herokuapp.com/login", {
-      email: email,
-      password: senha,
-    });
+    const promise = axios.post(
+      "https://mywallet-back-807c.onrender.com/login",
+      {
+        email: email,
+        password: senha,
+      }
+    );
     promise.then((res) => {
       setUsuario(res.data);
       navigate("/minhaCarteira");
